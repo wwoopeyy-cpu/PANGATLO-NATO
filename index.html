@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>a new valentine · love story</title>
+  <style>
+    /* reset & soft vintage vibe */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #fae3e9;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Georgia', 'Times New Roman', 'Segoe UI', serif;
+      padding: 1.5rem;
+      position: relative;
+    }
+
+    /* main envelope/card */
+    .valentine-letter {
+      max-width: 720px;
+      width: 100%;
+      background: #fffbf5;
+      background-image: linear-gradient(165deg, #fff5f0 0%, #ffffff 80%);
+      border-radius: 40px 12px 40px 12px;
+      box-shadow: 0 35px 60px -20px #b3828e, 0 10px 20px -5px #dbb6bf;
+      padding: 2.8rem 2.5rem 3.5rem;
+      border: 2px solid #ffe3df;
+      position: relative;
+      z-index: 5;
+    }
+
+    /* decorative laces */
+    .valentine-letter::before {
+      content: '✧ ✦ ✧';
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #fbdbe0;
+      color: #b34e64;
+      font-size: 1.4rem;
+      letter-spacing: 8px;
+      padding: 0 20px;
+      border-radius: 60px;
+      border: 1px solid #ffc2cb;
+    }
+
+    /* header */
+    .love-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .love-header h1 {
+      font-size: 4.2rem;
+      font-family: 'Brush Script MT', cursive;
+      color: #b34b62;
+      text-shadow: 2px 2px 0 #fdcbd6;
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+    }
+
+    .love-header p {
+      font-size: 1.2rem;
+      letter-spacing: 2px;
+      color: #936b76;
+      text-transform: uppercase;
+      border-top: 2px dotted #eeb8c3;
+      border-bottom: 2px dotted #eeb8c3;
+      display: inline-block;
+      padding: 0.4rem 2rem;
+      background: #ffedf0;
+      border-radius: 30px;
+    }
+
+    /* PICTURE FRAME - CHANGE THIS URL TO MATCH YOUR IMAGE */
+    .picture-frame {
+      width: 100%;
+      height: 240px;
+      border-radius: 40px 12px 40px 12px;
+      
+      /* ===== TRY THESE OPTIONS - USE ONE ===== */
+      
+      /* OPTION 1: If your file is 'background.JPEG' */
+      background: url('background.JPEG') center/cover no-repeat;
+      
+      /* OPTION 2: If your file is 'background.jpeg' (lowercase) */
+      /* background: url('background.jpeg') center/cover no-repeat; */
+      
+      /* OPTION 3: If your file is 'background.jpg' */
+      /* background: url('background.jpg') center/cover no-repeat; */
+      
+      /* OPTION 4: If your file is 'Background.JPEG' (capital B) */
+      /* background: url('Background.JPEG') center/cover no-repeat; */
+      
+      /* fallback color */
+      background-color: #fad7db;
+      box-shadow: inset 0 0 0 4px white, 0 15px 25px -8px #cc8f9b;
+      margin: 2rem 0;
+      border: 2px solid #ffe2e7;
+    }
+
+    /* caption */
+    .caption {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      font-size: 1.8rem;
+      color: #ae5c6c;
+      margin: 1.8rem 0 1rem;
+    }
+    .caption span {
+      font-size: 2.5rem;
+    }
+
+    /* poem */
+    .poem {
+      background: #fff4f7;
+      padding: 2rem 2.2rem;
+      border-radius: 70px 16px 70px 16px;
+      font-size: 1.35rem;
+      line-height: 1.9;
+      color: #48353a;
+      text-align: center;
+      box-shadow: inset 0 0 20px #ffeef2;
+      border: 1px solid white;
+      margin: 2rem 0 2.5rem;
+      font-style: italic;
+    }
+    .poem strong {
+      color: #c13954;
+      font-size: 1.8rem;
+      font-family: 'Brush Script MT', cursive;
+      display: block;
+      margin-top: 0.3rem;
+    }
+
+    /* question box */
+    .question-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .question-box h2 {
+      font-size: 2.3rem;
+      font-weight: 400;
+      color: #ab4c61;
+      background: #fff3f6;
+      padding: 0.5rem 2rem;
+      border-radius: 50px;
+      border: 2px solid #fec5cf;
+      box-shadow: 0 6px 0 #e7aeb9;
+    }
+
+    .choice-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2.5rem;
+      margin: 0.5rem 0 1rem;
+    }
+
+    .rose-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .rose-btn span {
+      font-size: 4rem;
+      filter: drop-shadow(0 8px 10px #e06f86);
+      transition: transform 0.2s;
+    }
+
+    .rose-btn p {
+      font-size: 1.8rem;
+      font-weight: 600;
+      background: white;
+      padding: 0.3rem 1.8rem;
+      border-radius: 40px;
+      border: 2px solid #ffb6c6;
+      color: #ac4357;
+      box-shadow: 0 5px 0 #e09fab;
+    }
+
+    .rose-btn:hover span {
+      transform: scale(1.2) rotate(5deg);
+    }
+    .rose-btn:hover p {
+      background: #ffe7ec;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 0 #e09fab;
+    }
+
+    /* response area */
+    .reply-note {
+      font-size: 2rem;
+      padding: 1rem 2rem;
+      background: #fde3e9;
+      border-radius: 100px;
+      border: 3px dashed #fc96ac;
+      color: #9e3f55;
+      min-height: 5rem;
+      width: 100%;
+      text-align: center;
+      margin: 2rem 0 0.5rem;
+      font-weight: 500;
+    }
+
+    /* footer */
+    .seal {
+      margin-top: 2rem;
+      text-align: center;
+      font-size: 1.7rem;
+      color: #b26173;
+      border-top: 1px solid #ffd9e1;
+      padding-top: 1.5rem;
+      letter-spacing: 6px;
+    }
+
+    /* floating hearts */
+    .floating-love {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .mini-heart {
+      position: absolute;
+      color: #ffb8c9;
+      font-size: 1.2rem;
+      opacity: 0.3;
+      animation: rise 10s infinite linear;
+      user-select: none;
+    }
+    @keyframes rise {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0.2; }
+      100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+    }
+
+    @media (max-width: 500px) {
+      .valentine-letter { padding: 1.8rem 1.2rem; }
+      .love-header h1 { font-size: 3.2rem; }
+      .picture-frame { height: 170px; }
+      .poem { font-size: 1.1rem; }
+      .question-box h2 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+  <!-- floating hearts -->
+  <div class="floating-love" id="floatingLove"></div>
+
+  <main class="valentine-letter">
+    <div class="love-header">
+      <h1>my dearest</h1>
+      <p>a valentine just for you</p>
+    </div>
+
+    <!-- PICTURE FRAME - your image will appear here -->
+    <div class="picture-frame" title="our special memory"></div>
+
+    <div class="caption">
+      <span>🌹</span> forever begins today <span>🌹</span>
+    </div>
+
+    <div class="poem">
+      “in a world of roses, you’re the one i’d pick.<br>
+      every color seems brighter, every moment more sweet.<br>
+      this little card holds a whisper true — <br>
+      <strong>happy valentine’s, love.</strong>”
+    </div>
+
+    <!-- interactive buttons -->
+    <div class="question-box">
+      <h2>✧ will you hold my heart? ✧</h2>
+
+      <div class="choice-row">
+        <button class="rose-btn" id="eternalYes">
+          <span>🌹🥀🌹</span>
+          <p>yes, always</p>
+        </button>
+
+        <button class="rose-btn" id="teasingNo">
+          <span>🌿</span>
+          <p>hmm... no?</p>
+        </button>
+      </div>
+
+      <!-- reply area -->
+      <div class="reply-note" id="loveReply">💬  ...  💬</div>
+    </div>
+
+    <div class="seal">
+      ♡ ♡ ♡
+    </div>
+  </main>
+
+  <script>
+    (function() {
+      // floating hearts generator
+      const loveContainer = document.getElementById('floatingLove');
+      for (let i = 0; i < 15; i++) {
+        const mini = document.createElement('div');
+        mini.className = 'mini-heart';
+        mini.innerText = ['❤️','🧡','💛','💚','💙','💜','🤍'][Math.floor(Math.random()*7)];
+        mini.style.left = Math.random() * 100 + '%';
+        mini.style.animationDuration = 6 + Math.random() * 12 + 's';
+        mini.style.animationDelay = Math.random() * 10 + 's';
+        mini.style.fontSize = (1 + Math.random() * 2) + 'rem';
+        loveContainer.appendChild(mini);
+      }
+
+      const yesBtn = document.getElementById('eternalYes');
+      const noBtn = document.getElementById('teasingNo');
+      const reply = document.getElementById('loveReply');
+
+      // sweet replies for yes
+      const yesReplies = [
+        '🌹 you’ve made my whole year! 🌹',
+        '💖 my heart is yours forever 💖',
+        '🥂 to us, today and always 🥂',
+        '💞 i knew it! love you infinity 💞',
+        '✨ a thousand kisses aren’t enough ✨',
+        '🌺 be ready for roses and sunshine!'
+      ];
+
+      // playful replies for no
+      const noReplies = [
+        '😅 but my heart only says yes...',
+        '💔 try again, beautiful soul',
+        '😘 i know you mean yes!',
+        '🌿 even the flowers say yes',
+        '🍫 how about chocolate? click yes?',
+        '💌 read the poem again :)'
+      ];
+
+      yesBtn.addEventListener('click', () => {
+        const rand = yesReplies[Math.floor(Math.random() * yesReplies.length)];
+        reply.textContent = '💘 ' + rand + ' 💘';
+        reply.style.background = '#ffe2ea';
+        reply.style.transform = 'scale(1.02)';
+        setTimeout(() => reply.style.transform = 'scale(1)', 150);
+
+        // sparkle effect on picture
+        document.querySelector('.picture-frame').style.boxShadow = 'inset 0 0 0 5px white, 0 20px 35px #f69aad';
+        setTimeout(() => {
+          document.querySelector('.picture-frame').style.boxShadow = 'inset 0 0 0 4px white, 0 15px 25px -8px #cc8f9b';
+        }, 600);
+      });
+
+      noBtn.addEventListener('click', () => {
+        const rand = noReplies[Math.floor(Math.random() * noReplies.length)];
+        reply.textContent = '😢 ' + rand + ' 😢';
+        reply.style.background = '#fadbe2';
+
+        // playful nudge
+        noBtn.style.transform = 'translateY(6px)';
+        setTimeout(() => noBtn.style.transform = 'translateY(0)', 250);
+
+        yesBtn.style.transform = 'scale(1.1)';
+        setTimeout(() => yesBtn.style.transform = 'scale(1)', 300);
+      });
+
+      // hover messages
+      yesBtn.addEventListener('mouseenter', () => {
+        reply.textContent = '💕 the sweetest choice 💕';
+        reply.style.background = '#ffe6ed';
+      });
+      yesBtn.addEventListener('mouseleave', () => {
+        if (reply.textContent.includes('sweetest choice')) {
+          reply.textContent = '💬  ...  💬';
+          reply.style.background = '#fde3e9';
+        }
+      });
+
+      noBtn.addEventListener('mouseenter', () => {
+        reply.textContent = '🤔 are you sure? click yes 🤔';
+        reply.style.background = '#fad7e0';
+      });
+      noBtn.addEventListener('mouseleave', () => {
+        if (reply.textContent.includes('are you sure')) {
+          reply.textContent = '💬  ...  💬';
+          reply.style.background = '#fde3e9';
+        }
+      });
+
+      // no button counter
+      let noCount = 0;
+      noBtn.addEventListener('click', function secretCounter() {
+        noCount++;
+        if (noCount >= 4) {
+          reply.textContent = '😂 okay, i’ll wait here for your YES 😂';
+          yesBtn.style.transform = 'scale(1.2)';
+        }
+        if (noCount >= 7) {
+          reply.textContent = '💢 i’ll just be your valentine anyway 💢';
+          noBtn.style.opacity = '0.6';
+          noBtn.disabled = true;
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
